@@ -1,7 +1,6 @@
-
 # TypeScript Crash Course Notes
 
-This document is a concise summary of all the TypeScript concepts, code examples, and exercises we've covered during our session.
+This document is a comprehensive summary of all TypeScript concepts covered, including code examples, challenges, and solutions to help reinforce learning.
 
 ---
 
@@ -13,6 +12,18 @@ let population: number = 10;
 let isCapital: boolean = true;
 ```
 
+### Challenge
+
+Declare a variable for a person's name, age, and employment status.
+
+#### Solution
+
+```ts
+let name: string = "Jane";
+let age: number = 30;
+let isEmployed: boolean = true;
+```
+
 ---
 
 ## ✅ Functions with Type Annotations
@@ -20,6 +31,18 @@ let isCapital: boolean = true;
 ```ts
 function double(num: number): number {
   return num * 2;
+}
+```
+
+### Challenge
+
+Write a function `square` that returns the square of a number.
+
+#### Solution
+
+```ts
+function square(n: number): number {
+  return n * n;
 }
 ```
 
@@ -34,6 +57,20 @@ const product: { title: string; price: number } = {
 };
 ```
 
+### Challenge
+
+Create a `user` object with `name`, `email`, and `isActive` fields.
+
+#### Solution
+
+```ts
+const user: { name: string; email: string; isActive: boolean } = {
+  name: "Alice",
+  email: "alice@example.com",
+  isActive: true,
+};
+```
+
 ---
 
 ## ✅ Interfaces
@@ -45,20 +82,22 @@ interface Book {
   year: number;
 }
 
-const book1: Book = {
-  title: "Great Dane",
-  author: "Phoenix",
-  year: 1980,
-};
-
-const book2: Book = {
-  title: "Big Fat Goat",
-  author: "Empr",
-  year: 2006,
-};
-
 function printBook(book: Book): void {
   console.log(`${book.title} by ${book.author}, published in ${book.year}`);
+}
+```
+
+### Challenge
+
+Define an interface `UserProfile` with `username`, `email`, and optional `bio`.
+
+#### Solution
+
+```ts
+interface UserProfile {
+  username: string;
+  email: string;
+  bio?: string;
 }
 ```
 
@@ -69,6 +108,18 @@ function printBook(book: Book): void {
 ```ts
 function describeMovie({ title, director, duration, isReleased }: Movie): void {
   console.log(`${title}, directed by ${director}, lasts ${duration}. Released: ${isReleased}`);
+}
+```
+
+### Challenge
+
+Use destructuring in a function to print a blog post’s title and author.
+
+#### Solution
+
+```ts
+function printPost({ title, author }: BlogPost): void {
+  console.log(`${title} by ${author ?? "anonymous"}`);
 }
 ```
 
@@ -83,12 +134,8 @@ interface BlogPost {
   author?: string;
 }
 
-function printPost({ title, content, author }: BlogPost): void {
-  if (author !== undefined) {
-    console.log(`${title} by ${author}`);
-  } else {
-    console.log(`${title} (anonymous)`);
-  }
+function printPost({ title, author }: BlogPost): void {
+  console.log(author ? `${title} by ${author}` : `${title} (anonymous)`);
 }
 ```
 
@@ -117,6 +164,23 @@ type Coordinate = {
 };
 ```
 
+### Challenge
+
+Define a `Rectangle` type with width and height and calculate area.
+
+#### Solution
+
+```ts
+type Rectangle = {
+  width: number;
+  height: number;
+};
+
+function area(rect: Rectangle): number {
+  return rect.width * rect.height;
+}
+```
+
 ---
 
 ## ✅ Generics
@@ -131,6 +195,18 @@ function makePair<T, P>(a: T, b: P): [T, P] {
 }
 ```
 
+### Challenge
+
+Create a generic function `identity<T>(arg: T): T`.
+
+#### Solution
+
+```ts
+function identity<T>(arg: T): T {
+  return arg;
+}
+```
+
 ---
 
 ## ✅ Function Overloads
@@ -140,11 +216,7 @@ function formatInput(a: string): string;
 function formatInput(a: number): string;
 
 function formatInput(a: any): string {
-  if (typeof a === "string") {
-    return a.toUpperCase();
-  } else {
-    return `${a}.00`;
-  }
+  return typeof a === "string" ? a.toUpperCase() : `${a}.00`;
 }
 ```
 
@@ -170,13 +242,11 @@ function isAdmin(user: User): user is Admin {
   return user.role === "admin";
 }
 
-function handleUser({ role, username, accessLevel }: User) {
-  if (role === "admin") {
-    console.log(`Admin: [${username}] (Level: [${accessLevel ?? "N/A"}])`);
-  } else if (role === "guest") {
-    console.log(`Guest: [${username}]`);
+function handleUser(user: User) {
+  if (isAdmin(user)) {
+    console.log(`Admin: [${user.username}] (Level: ${user.accessLevel ?? "N/A"})`);
   } else {
-    console.log("Invalid user");
+    console.log(`Guest: [${user.username}]`);
   }
 }
 ```
@@ -220,6 +290,24 @@ function sendNotification(notification: Notification) {
       break;
   }
 }
+```
+
+### Challenge
+
+Filter all `SMS` notifications and print them.
+
+#### Solution
+
+```ts
+function isSMS(n: Notification): n is SMSNotification {
+  return n.type === "sms";
+}
+
+const smsNotifications = notif.filter(isSMS);
+
+smsNotifications.forEach(({ phoneNumber, message }) => {
+  console.log(`SMS to ${phoneNumber}: ${message}`);
+});
 ```
 
 ---
@@ -268,5 +356,3 @@ type OnlyNumbers<T> = T extends number ? T : never;
 ---
 
 This document will grow as your TypeScript journey continues! 🚀
-
-> Save this as `README.md` in your notes folder and open it in VS Code for a formatted view anytime.
