@@ -107,7 +107,9 @@ interface UserProfile {
 
 ```ts
 function describeMovie({ title, director, duration, isReleased }: Movie): void {
-  console.log(`${title}, directed by ${director}, lasts ${duration}. Released: ${isReleased}`);
+  console.log(
+    `${title}, directed by ${director}, lasts ${duration}. Released: ${isReleased}`
+  );
 }
 ```
 
@@ -244,7 +246,9 @@ function isAdmin(user: User): user is Admin {
 
 function handleUser(user: User) {
   if (isAdmin(user)) {
-    console.log(`Admin: [${user.username}] (Level: ${user.accessLevel ?? "N/A"})`);
+    console.log(
+      `Admin: [${user.username}] (Level: ${user.accessLevel ?? "N/A"})`
+    );
   } else {
     console.log(`Guest: [${user.username}]`);
   }
@@ -280,13 +284,19 @@ type Notification = EmailNotification | SMSNotification | PushNotification;
 function sendNotification(notification: Notification) {
   switch (notification.type) {
     case "email":
-      console.log(`Sending email to ${notification.to}: ${notification.subject}`);
+      console.log(
+        `Sending email to ${notification.to}: ${notification.subject}`
+      );
       break;
     case "sms":
-      console.log(`Sending sms to ${notification.phoneNumber}: ${notification.message}`);
+      console.log(
+        `Sending sms to ${notification.phoneNumber}: ${notification.message}`
+      );
       break;
     case "push":
-      console.log(`Sending push to ${notification.deviceId}: ${notification.title} - ${notification.body}`);
+      console.log(
+        `Sending push to ${notification.deviceId}: ${notification.title} - ${notification.body}`
+      );
       break;
   }
 }
@@ -354,5 +364,19 @@ type OnlyNumbers<T> = T extends number ? T : never;
 ```
 
 ---
+
+## ✅ Typing Events
+
+Here’s how to type common events in React:
+
+```ts
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  console.log(e.target.value);
+};
+
+const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  console.log("Clicked");
+};
+```
 
 This document will grow as your TypeScript journey continues! 🚀
