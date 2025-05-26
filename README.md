@@ -367,7 +367,7 @@ type OnlyNumbers<T> = T extends number ? T : never;
 
 ## ✅ Typing Events
 
-Here’s how to type common events in React:
+Here's how to type common events in React:
 
 ```ts
 const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
