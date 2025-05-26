@@ -379,4 +379,25 @@ const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 };
 ```
 
-This document will grow as your TypeScript journey continues! 🚀
+## 🔍 The code:
+
+```ts
+const className = variant === "primary" ? "btn-primary" : "btn-secondary";
+```
+
+## 💡 What it means:
+
+If `variant` equals `"primary"`, then className will be `"btn-primary"`.
+Otherwise, it will be `"btn-secondary"`.
+
+## ✅ Equivalent if written with if:
+
+```ts
+let className;
+
+if (variant === "primary") {
+  className = "btn-primary";
+} else {
+  className = "btn-secondary";
+}
+```
