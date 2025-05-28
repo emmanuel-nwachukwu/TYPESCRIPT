@@ -401,3 +401,20 @@ if (variant === "primary") {
   className = "btn-secondary";
 }
 ```
+
+Takes the current obj as previous then destructured them to have access to all
+items inner, then select an item from the object whose name = name and updates
+its value to value 
+```ts
+setFormData((prev) => ({
+  ...prev,
+  [name]: value,
+}));
+```
+
+Just like above butin this case the current itemis not an object
+so it just takes the previous state of the item which is `boolean`
+in this case and negates its value  
+```ts
+const toggle = () => setState((prev) => !prev);
+```
